@@ -11,7 +11,7 @@ import okhttp3.Request;
 public class EASTClient  {
     OkHttpClient mHttpClient = new OkHttpClient();
     Request request = new Request.Builder()
-                            .url("http://192.168.0.106:80/php/east_app_data/app/login.php")
+                            .url("http://192.168.0.106:80/php/east_app_data/app/car_banner.php")
                             .build();
     Call call = mHttpClient.newCall(request);
 

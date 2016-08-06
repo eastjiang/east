@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import com.eastproject.app.main.HomeActivity;
 import com.eastproject.app.utils.BitmapUtil;
 
 import java.io.InputStream;
@@ -26,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
             startActivity(intent);
         }
     };
