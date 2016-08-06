@@ -2,6 +2,8 @@ package com.eastproject.app.main;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.alibaba.fastjson.JSON;
@@ -20,6 +22,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,16 +35,35 @@ public class HomeActivity extends AppCompatActivity {
     private DisplayImageOptions mOptions;
     private ConvenientBanner mConvenientBanner;
 //    private List<String> mNetworkImagesList;
-    private List<JSONArray> mNetworkImagesList;
+    private List<JSONObject> mNetworkImagesList = new ArrayList<>();
     private String[] images = {
-            "http://192.168.0.106:80/php/east_app_data/images/crousel_1.jpg",
-            "http://192.168.0.106:80/php/east_app_data/images/crousel_2.jpg",
-            "http://192.168.0.106:80/php/east_app_data/images/crousel_3.jpg",
-            "http://192.168.0.106:80/php/east_app_data/images/crousel_4.jpg",
-            "http://192.168.0.106:80/php/east_app_data/images/crousel_5.jpg"
+            "http://192.168.0.106:80/php/east_app_data/images/banner/crousel_1_1.jpg",
+            "http://192.168.0.106:80/php/east_app_data/images/banner/crousel_2_1.jpg",
+            "http://192.168.0.106:80/php/east_app_data/images/banner/crousel_3_1.jpg",
+            "http://192.168.0.106:80/php/east_app_data/images/banner/crousel_4_1.jpg",
+            "http://192.168.0.106:80/php/east_app_data/images/banner/crousel_5_1.jpg"
     };
 
     private JSONArray mData;
+    public Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            JSONArray data = (JSONArray) msg.obj;
+            for (int i = 0; i < data.size(); i++) {
+                mNetworkImagesList.add(data.getJSONObject(i));
+            }
+            mConvenientBanner.setPages(new CBViewHolderCreator<ConvenientBannerImageHolder>() {
+
+                @Override
+                public ConvenientBannerImageHolder createHolder() {
+                    return new ConvenientBannerImageHolder(mOptions);
+                }
+            }, mNetworkImagesList)
+                    .setPageIndicator(new int[]{R.drawable.dot_unselected, R.drawable.dot_selected})
+                    .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
                 .cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
+        mConvenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
 
         //从数据库中获取数据
         Call call = new EASTClient().getCall();
@@ -68,20 +91,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 mData = (JSONArray) JSON.parseObject(response.body().string()).get("data");
+                Message message = Message.obtain(mHandler);
+                message.obj = mData;
+                message.sendToTarget();
             }
         });
-
-        mConvenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
-        mNetworkImagesList = Arrays.asList(mData);
-        mConvenientBanner.setPages(new CBViewHolderCreator<ConvenientBannerImageHolder>() {
-
-            @Override
-            public ConvenientBannerImageHolder createHolder() {
-                return new ConvenientBannerImageHolder(mOptions);
-            }
-        }, mNetworkImagesList)
-                .setPageIndicator(new int[]{R.drawable.dot_unselected, R.drawable.dot_selected})
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
     // 开始自动翻页

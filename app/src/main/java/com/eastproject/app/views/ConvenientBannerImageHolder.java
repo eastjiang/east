@@ -1,11 +1,15 @@
 package com.eastproject.app.views;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bigkoo.convenientbanner.holder.Holder;
@@ -37,7 +41,7 @@ public class ConvenientBannerImageHolder implements Holder<JSONObject> {
     public View createView(Context context) {
         //你可以通过layout文件来创建，也可以像我一样用代码创建，不一定是Image，任何控件都可以进行翻页
 //        imageView = new ImageView(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.item_connvenien_banner, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_connvenien_banner, null, false);
         mLeftImgField = (ImageView) view.findViewById(R.id.banner_left_img);
         mRightUpImgField = (ImageView) view.findViewById(R.id.banner_right_up_img);
         mRightDownImgField = (ImageView) view.findViewById(R.id.banner_right_down_img);
@@ -54,7 +58,7 @@ public class ConvenientBannerImageHolder implements Holder<JSONObject> {
     }
 
     @Override
-    public void UpdateUI(Context context,int position, JSONObject data) {
+    public void UpdateUI(Context context, int position, JSONObject data) {
         //显示图片的配置
         ImageLoader.getInstance().displayImage(data.get("left_img_url").toString(), mLeftImgField, mOptions);
         ImageLoader.getInstance().displayImage(data.get("right_up_img_url").toString(), mRightUpImgField, mOptions);
