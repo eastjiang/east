@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2,3" >
+
+        <TableRow
+                android:layout_marginTop="8dp">
+
+            <Button
+                    style="@style/ButtonPink"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="性能健将"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    style="@style/ButtonOrange"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="“范儿”改装"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    style="@style/ButtonDarkRed"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="经典名车"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    style="@style/ButtonBlueGreen"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="皮卡特辑"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+        </TableRow>
+
+        <TableRow
+                android:layout_marginTop="8dp">
+
+            <Button
+                    style="@style/ButtonDarkPink"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="精美实拍"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    style="@style/ButtonYellow"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="肌肉猛兽"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    style="@style/ButtonBlue"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="平民英雄"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    style="@style/ButtonGreen"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="环保先锋"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

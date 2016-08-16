@@ -1,8 +1,10 @@
 package com.eastproject.app.main;
 
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.FrameLayout;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -31,7 +33,7 @@ public class HomeActivity extends NavigationActivity {
     private DisplayImageOptions mOptions;
     private ConvenientBanner mConvenientBanner;
     private List<JSONObject> mNetworkImagesList = new ArrayList<>();
-    private FrameLayout mContentView;
+//    private FrameLayout mContentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +49,11 @@ public class HomeActivity extends NavigationActivity {
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
         mConvenientBanner = (ConvenientBanner) findViewById(R.id.convenientBanner);
-        mContentView = (FrameLayout) findViewById(R.id.content_view);
+//        mContentView = (FrameLayout) findViewById(R.id.home_content_view);
+        //在home_content_view中添加fragment
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.home_content_view, new HomeFragment());
+        ft.commit();
 
         loadImages();
     }

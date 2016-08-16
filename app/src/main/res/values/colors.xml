@@ -2,4 +2,13 @@
 <resources>
     <color name="navbar_color">#CE3D3A</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="pink">#FF34B3</color>
+    <color name="dark_pink">#E1074E</color>
+    <color name="orange">#FF7F24</color>
+    <color name="yellow">#FEB51B</color>
+    <color name="dark_red">#CD2626</color>
+    <color name="blue_green">#66CDAA</color>
+    <color name="blue">#34B5E3</color>
+    <color name="green">#97CB16</color>
 </resources>

@@ -6,4 +6,44 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
+    <style name="ButtonPink">
+        <item name="android:background">@drawable/pink_bg</item>
+        <item name="android:textColor">@drawable/pink_text</item>
+    </style>
+
+    <style name="ButtonOrange">
+        <item name="android:background">@drawable/orange_bg</item>
+        <item name="android:textColor">@drawable/orange_text</item>
+    </style>
+
+    <style name="ButtonDarkRed">
+        <item name="android:background">@drawable/dark_red_bg</item>
+        <item name="android:textColor">@drawable/dark_red_text</item>
+    </style>
+
+    <style name="ButtonBlueGreen">
+        <item name="android:background">@drawable/blue_green_bg</item>
+        <item name="android:textColor">@drawable/blue_green_text</item>
+    </style>
+
+    <style name="ButtonDarkPink">
+        <item name="android:background">@drawable/dark_pink_bg</item>
+        <item name="android:textColor">@drawable/dark_pink_text</item>
+    </style>
+
+    <style name="ButtonYellow">
+        <item name="android:background">@drawable/yellow_bg</item>
+        <item name="android:textColor">@drawable/yellow_text</item>
+    </style>
+
+    <style name="ButtonBlue">
+        <item name="android:background">@drawable/blue_bg</item>
+        <item name="android:textColor">@drawable/blue_text</item>
+    </style>
+
+    <style name="ButtonGreen">
+        <item name="android:background">@drawable/green_bg</item>
+        <item name="android:textColor">@drawable/green_text</item>
+    </style>
+
 </resources>
