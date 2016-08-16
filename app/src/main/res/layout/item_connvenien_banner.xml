@@ -11,6 +11,7 @@
 
         <ImageView
                 android:id="@+id/banner_left_img"
+                android:background="@drawable/prestrain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -51,6 +52,7 @@
 
             <ImageView
                     android:id="@+id/banner_right_up_img"
+                    android:background="@drawable/prestrain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -71,6 +73,7 @@
 
             <ImageView
                     android:id="@+id/banner_right_down_img"
+                    android:background="@drawable/prestrain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

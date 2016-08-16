@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!--网络错误-->
+    <string name="error_1">连接失败，请检查网络是否连接</string>
+    <string name="error_2">服务器错误</string>
+    <string name="error_3">内部错误</string>
 </resources>
