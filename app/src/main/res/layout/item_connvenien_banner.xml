@@ -6,12 +6,11 @@
 
     <FrameLayout
             android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="200dp">
+            android:layout_weight="2"
+            android:layout_height="wrap_content">
 
         <ImageView
                 android:id="@+id/banner_left_img"
-                android:background="@drawable/prestrain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -41,8 +40,8 @@
 
     <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
         <FrameLayout
@@ -52,7 +51,6 @@
 
             <ImageView
                     android:id="@+id/banner_right_up_img"
-                    android:background="@drawable/prestrain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -62,8 +60,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:textSize="12sp"
-                    android:textColor="#FFFFFF"
-                    android:lines="1"/>
+                    android:textColor="#FFFFFF"/>
         </FrameLayout>
 
         <FrameLayout
@@ -73,7 +70,6 @@
 
             <ImageView
                     android:id="@+id/banner_right_down_img"
-                    android:background="@drawable/prestrain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -83,8 +79,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:lines="1"/>
+                    android:textSize="12sp"/>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="navbar_color">#CE3D3A</color>
+    <color name="text_color">#F44336</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="pink">#FF34B3</color>
@@ -11,4 +12,6 @@
     <color name="blue_green">#66CDAA</color>
     <color name="blue">#34B5E3</color>
     <color name="green">#97CB16</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="light_divider">#33BDBDBD</color>
 </resources>
