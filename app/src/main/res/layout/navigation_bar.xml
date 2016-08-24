@@ -1,8 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+              android:orientation="horizontal"
               android:background="@color/navbar_color"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
               android:layout_width="match_parent"
               android:layout_height="56dp">
 
+    <ImageButton
+            android:id="@+id/left_icon_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:visibility="gone"
+            android:src="@drawable/left_icon_btn"
+            android:layout_height="match_parent"/>
+
+    <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+        <EditText
+                android:id="@+id/search_edit"
+                android:background="@drawable/search_bar_bg"
+                android:visibility="gone"
+                android:textCursorDrawable="@drawable/cursor_bg"
+                android:textSize="18sp"
+                android:textColor="#66FFFFFF"
+                android:hint="搜索汽车品牌"
+                android:textColorHint="#33FFFFFF"
+                android:paddingLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <ImageButton
+            android:id="@+id/right_icon_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:background="@null"
+            android:src="@drawable/search_btn"
+            android:layout_height="match_parent"/>
 </LinearLayout>
