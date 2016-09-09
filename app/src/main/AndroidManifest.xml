@@ -28,7 +28,7 @@
 
         <activity android:name=".main.HomeActivity"/>
         <activity android:name=".views.NavigationActivity"/>
-        <activity android:name=".sort.SortSearchActivity"/>
+        <activity android:name=".search.SortSearchActivity"/>
     </application>
 
 </manifest>

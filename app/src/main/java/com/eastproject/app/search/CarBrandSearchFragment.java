@@ -1,17 +1,24 @@
-package com.eastproject.app.sort;
+package com.eastproject.app.search;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.*;
+import com.alibaba.fastjson.JSONArray;
 import com.eastproject.app.R;
+import com.eastproject.app.client.EASTCallback;
+import com.eastproject.app.client.EASTClient;
+import com.eastproject.app.client.EASTException;
 import com.eastproject.app.models.SortModel;
 import com.eastproject.app.utils.CharacterParser;
 import com.eastproject.app.utils.PinyinComparator;
+import com.eastproject.app.utils.PopUtils;
 import com.eastproject.app.views.NavigationActivity;
 import com.eastproject.app.views.SideBar;
 
@@ -20,13 +27,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by TMD on 2016/8/24.
+ * Created by TMD on 2016/9/9.
  */
-public class SortSearchActivity extends NavigationActivity {
-
+public class CarBrandSearchFragment extends Fragment {
     private TextView dialog;
     private ListView sortListView;
     private SideBar sideBar;
+    private EditText mSearchEdit;
     /**
      * 显示字母的TextView
      */
@@ -36,38 +43,31 @@ public class SortSearchActivity extends NavigationActivity {
      * 汉字转换成拼音的类
      */
     private CharacterParser characterParser;
-    private List<SortModel> SourceDateList;
+    private List<SortModel> mSourceDateList;
 
     /**
      * 根据拼音来排列ListView里面的数据类
      */
     private PinyinComparator pinyinComparator;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sortsearch_activity);
-
-        setLeftBtn();
-        setSearchEdit();
-        getLeftImgBtn().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SortSearchActivity.this.onBackPressed();
-            }
-        });
-        initViews();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_carbrand_search, container, false);
+        initViews(v);
+        return v;
     }
 
-    private void initViews() {
+    private void initViews(View view) {
         //实例化汉字转拼音类
         characterParser = CharacterParser.getInstance();
 
         pinyinComparator = new PinyinComparator();
 
-        sideBar = (SideBar) findViewById(R.id.side_bar);
-        dialog = (TextView) findViewById(R.id.letter);
+        sideBar = (SideBar) view.findViewById(R.id.side_bar);
+        dialog = (TextView) view.findViewById(R.id.letter);
         sideBar.setTextView(dialog);
+        mSearchEdit = ((NavigationActivity) getActivity()).getSearchEdit();
 
         //设置右侧触摸监听
         sideBar.setOnTouchingLetterChangedListener(new SideBar.OnTouchingLetterChangedListener() {
@@ -83,39 +83,78 @@ public class SortSearchActivity extends NavigationActivity {
             }
         });
 
-        sortListView = (ListView) findViewById(R.id.car_brand);
+        sortListView = (ListView) view.findViewById(R.id.car_brand);
         sortListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 //这里要利用adapter.getItem(position)来获取当前position所对应的对象
-                Toast.makeText(getApplication(), ((SortModel)adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ((SortModel)adapter.getItem(position)).getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        SourceDateList = filledData(getResources().getStringArray(R.array.date));
-
-        // 根据a-z进行排序源数据
-        Collections.sort(SourceDateList, pinyinComparator);
-        adapter = new SortAdapter(this, SourceDateList);
-        sortListView.setAdapter(adapter);
+//        SourceDateList = filledData(getResources().getStringArray(R.array.date));
+        if (mSourceDateList == null) {
+            loadData();
+        }
     }
 
+    private void loadData() {
+        EASTClient.getInstance(getActivity()).queryUrl("/car_brand.php", new EASTCallback<JSONArray>() {
+            @Override
+            public void done(JSONArray array, EASTException e) {
+                if (e != null) {
+                    PopUtils.showToast(getActivity(), e.getMessage());
+                    getActivity().onBackPressed();
+                } else {
+                    if (array != null) {
+                        mSourceDateList = filledData(array);
+                        // 根据a-z进行排序源数据
+                        Collections.sort(mSourceDateList, pinyinComparator);
+                        adapter = new SortAdapter(getActivity(), mSourceDateList);
+                        sortListView.setAdapter(adapter);
+                    }
+                }
+            }
+        }, JSONArray.class);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mSearchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filterData(s.toString());
+            }
+        });
+    }
 
     /**
      * 为ListView填充数据
      * @param date
      * @return
      */
-    private List<SortModel> filledData(String [] date){
+    private List<SortModel> filledData(JSONArray date){
         List<SortModel> mSortList = new ArrayList<SortModel>();
 
-        for(int i=0; i<date.length; i++){
+        for(int i=0; i<date.size(); i++){
             SortModel sortModel = new SortModel();
-            sortModel.setName(date[i]);
+            sortModel.setName(date.getJSONObject(i).get("brand_name").toString());
             //汉字转换成拼音
-            String pinyin = characterParser.getSelling(date[i]);
+            String pinyin = characterParser.getSelling(date.getJSONObject(i).get("brand_name").toString());
             String sortString = pinyin.substring(0, 1).toUpperCase();
 
             // 正则表达式，判断首字母是否是英文字母
@@ -139,10 +178,10 @@ public class SortSearchActivity extends NavigationActivity {
         List<SortModel> filterDateList = new ArrayList<SortModel>();
 
         if (TextUtils.isEmpty(filterStr)) {
-            filterDateList = SourceDateList;
+            filterDateList = mSourceDateList;
         } else {
             filterDateList.clear();
-            for (SortModel sortModel : SourceDateList) {
+            for (SortModel sortModel : mSourceDateList) {
                 String name = sortModel.getName();
                 if (name.toUpperCase().indexOf(
                         filterStr.toString().toUpperCase()) != -1

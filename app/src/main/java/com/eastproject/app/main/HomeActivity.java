@@ -65,7 +65,7 @@ public class HomeActivity extends NavigationActivity {
      * 从服务器获取图片
      */
     private void loadImages() {
-        EASTClient.getInstance(HomeActivity.this).queryUrl("/app/car_banner.php", new EASTCallback<JSONArray>() {
+        EASTClient.getInstance(HomeActivity.this).queryUrl("/car_banner.php", new EASTCallback<JSONArray>() {
             @Override
             public void done(JSONArray array, EASTException e) {
                 if (e != null) {

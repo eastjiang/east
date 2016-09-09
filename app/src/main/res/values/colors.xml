@@ -22,7 +22,7 @@
     <color name="primary_text_color">#212121</color>
     <color name="secondary_text_color">#757575</color>
     <color name="divider_color">#BDBDBD</color>
-    <color name="letter_bg">#DD808080</color>
-    <color name="side_bar_bg">#DDBFBFBF</color>
+    <color name="letter_bg">#808080</color>
+    <color name="side_bar_bg">#BFBFBF</color>
     <color name="side_bar_text_color">#565656</color>
 </resources>

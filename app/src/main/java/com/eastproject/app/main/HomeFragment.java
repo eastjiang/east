@@ -1,7 +1,6 @@
 package com.eastproject.app.main;
 
 import android.app.Fragment;
-import android.app.NativeActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.eastproject.app.R;
-import com.eastproject.app.sort.SortSearchActivity;
+import com.eastproject.app.search.SortSearchActivity;
 import com.eastproject.app.views.NavigationActivity;
 
 /**

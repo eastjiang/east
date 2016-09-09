@@ -1,4 +1,4 @@
-package com.eastproject.app.sort;
+package com.eastproject.app.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;

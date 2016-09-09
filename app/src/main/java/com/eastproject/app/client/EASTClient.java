@@ -18,7 +18,7 @@ import java.io.IOException;
  * Created by TMD on 2016/7/20.
  */
 public class EASTClient  {
-    private static final String URL_PATH = "http://192.168.0.106:80/php/east_app_data";
+    private static final String URL_PATH = "http://192.168.0.100:80/php/east_app_data/app";
 
     private static EASTClient eastClient;
     private OkHttpClient mHttpClient;
